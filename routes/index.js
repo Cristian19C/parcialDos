@@ -21,15 +21,13 @@ router.get('/add', (req, res) => {
   res.render('addPlatos', {'title': 'Agregar Platos'})
 })
 
-router.post('/add', async (req, res) => {
+router.post('/add', async(req,res)=>{
     console.log('entro ha agregar');
-    const { idDish, name, calories, isVegetarian, value, comments } = req.body;
-  
-    // Corregir la asignación del valor booleano para isVegetarian
-    const isVegetarianBool = isVegetarian === 'S' ? true : false;
-  
+      const {idDish, name, calories, isVegetarian, value, comments} = req.body
+
+      const isVegetarianBool = isVegetarian === 'S' ? true : false;
     // Agregar el nuevo registro al objeto 'data'
-    const data = {
+      data = {
       idDish: idDish,
       name: name,
       calories: calories,
@@ -37,33 +35,16 @@ router.post('/add', async (req, res) => {
       value: value,
       comments: comments
     };
-  
+
     console.log(data);
-  
-    try {
-      // Llamar a la función addFishes y manejar la respuesta
-      const addplatos = await addFishes(data);
-  
-      // Si la función addFishes no lanza errores, redirigir al usuario a la página de inicio
-      res.redirect('/');
-    } catch (error) {
-      // En caso de error, mostrar un mensaje de error o realizar alguna otra acción apropiada
-      console.log(error);
-      res.status(500).send('Error al agregar el plato');
-    }
-  });
-  
+    const addplatos = await addFishes(data)
 
-// router.get('/:id', async(req, res) => {
-  
-//   console.log('entri');
-//     const id = req.params.id;
-//     console.log(id);
-//     const inventario = await findById(id)
-//     console.log(inventario);
-//     res.render('updateInventory', {'data':inventario.data, 'title': 'Actualizar registros'})
+    
+    res.redirect('/')
+    
+})
 
-// });
+
 
 
 
